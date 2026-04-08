@@ -9,10 +9,11 @@ public class SortingAnimation extends AnimationScreen {
 
     private static final int totalWidth = 500;
     private static final int totalHeight = 300;
-
+    
     private PText header;
     private IntBoxNode[] myNumberBoxes;
 
+    private static final int ARRAY_SIZE = 12; // Assignment requires 12 elements
     @Override
     public void addInitialNodes() {
         setBounds(0, 0, totalWidth, totalHeight);
@@ -20,14 +21,15 @@ public class SortingAnimation extends AnimationScreen {
         // add background as a coloured box
         addColouredBox(0, 0, totalWidth, totalHeight, Color.LIGHT_GRAY);
 
-        // add header text
+        // TODO: change header text to actual algorithm name
         header = addText(0, 0, "Sorting is cool!");
         header.setTextPaint(Color.DARK_GRAY);
 
         // You could use an array of int nodes to hold numbers
         // to visualize the array.
-        myNumberBoxes = new IntBoxNode[2];
+        myNumberBoxes = new IntBoxNode[ARRAY_SIZE]; // Changed already to 12 elements
 
+        //TODO: This only does 2 box, we need 12
         int num1 = (int) (Math.random() * 40 + 1);
         myNumberBoxes[0] = addIntBox(-30, -30, 30, 30, num1);
         myNumberBoxes[0].setPaint(Color.BLUE);
@@ -43,6 +45,8 @@ public class SortingAnimation extends AnimationScreen {
         // wait for initialization before animating
         waitForInitialization();
 
+        //TODO:Remove demo animation and replace with call to ShellSort.sort(myNumberBoxes, This);
+        
         // Some example animation steps:
 
         // Parameters are x, y, scale, rotation (in radians), and time (in ms)
@@ -70,6 +74,7 @@ public class SortingAnimation extends AnimationScreen {
         myNumberBoxes[0].animateToColor(Color.GREEN, 1000);
         myNumberBoxes[1].animateToColor(Color.GREEN, 1000);
 
+        //TODO: remove 2 element demo
         // You could use the number in boxes for comparisons
         if (myNumberBoxes[0].getNumber() > myNumberBoxes[1].getNumber()) {
             // You can even swap values in the array
@@ -84,6 +89,7 @@ public class SortingAnimation extends AnimationScreen {
         }
 
         // You can add items as you go...
+        // TODO: change the finish text to what we want it to be
         PText allDone = addText(100, 200, "All Done!");
         allDone.setFont(new Font("Consolas", Font.PLAIN, 36));
         allDone.setTextPaint(Color.WHITE);
@@ -113,4 +119,44 @@ public class SortingAnimation extends AnimationScreen {
             }
         }
     }
+    
+    /*
+     * NEEDS TO BE IMPLEMENTED (REMOVE TODO comments after we do it)
+     */
+    private void createRandomBoxes() {
+        // TODO: create 12 random boxes and place them on screen
+    }
+
+    private double getBoxX(int index) {
+        // TODO: compute x-position from index
+        return 0;
+    }
+
+    private double getBoxY() {
+        // TODO: return common y-position for boxes
+        return 0;
+    }
+
+    public void highlightCompare(int i, int j) {
+        // TODO: animate comparison highlight
+    }
+
+    public void resetCompare(int i, int j) {
+        // TODO: restore normal box colors
+    }
+
+    public void shiftBox(int from, int to) {
+        // TODO: animate a shifted box
+    }
+
+    public void moveBoxToIndex(IntBoxNode box, int index) {
+        // TODO: animate a box to its index position
+    }
+
+    public void updateStatus(String text) {
+        // TODO: update header or status text
+    }
+
+    
+    
 }
