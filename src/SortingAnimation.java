@@ -124,12 +124,16 @@ public class SortingAnimation extends AnimationScreen {
      * NEEDS TO BE IMPLEMENTED (REMOVE TODO comments after we do it)
      */
     private void createRandomBoxes() {
-        // TODO: create 12 random boxes and place them on screen
+        for (int i = 0; i < ARRAY_SIZE; i++) {
+            int num = (int) (Math.random() * 40 + 1);
+            myNumberBoxes[i] = addIntBox(getBoxX(i), getBoxY(), BOX_SIZE, BOX_SIZE, num);
+            myNumberBoxes[i].setPaint(Color.BLUE);
+            myNumberBoxes[i].setTextPaint(Color.RED);
+        }
     }
 
     private double getBoxX(int index) {
-        // TODO: compute x-position from index
-        return 0;
+       return MARGIN + index * (BOX_SIZE + SPACING);
     }
 
     private double getBoxY() {
@@ -138,7 +142,7 @@ public class SortingAnimation extends AnimationScreen {
     }
 
     public void highlightCompare(int i, int j) {
-        // TODO: animate comparison highlight
+        return ROW_Y;
     }
 
     public void resetCompare(int i, int j) {
