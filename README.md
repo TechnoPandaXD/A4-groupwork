@@ -1,2 +1,9 @@
-# A4-groupwork
-Code for A4
+# A4-group members
+
+
+Kevin Le
+
+Louise Pablo
+
+Borys Protsenko
+
