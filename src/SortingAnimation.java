@@ -9,6 +9,10 @@ public class SortingAnimation extends AnimationScreen {
 
     private static final int totalWidth = 500;
     private static final int totalHeight = 300;
+    private static final int BOX_SIZE = 30;
+    private static final int SPACING = 10;
+    private static final int MARGIN = 50;
+    private static final int ROW_Y = 150;
     
     private PText header;
     private IntBoxNode[] myNumberBoxes;
@@ -27,69 +31,15 @@ public class SortingAnimation extends AnimationScreen {
 
         // You could use an array of int nodes to hold numbers
         // to visualize the array.
-        myNumberBoxes = new IntBoxNode[ARRAY_SIZE]; // Changed already to 12 elements
-
-        //TODO: This only does 2 box, we need 12
-        int num1 = (int) (Math.random() * 40 + 1);
-        myNumberBoxes[0] = addIntBox(-30, -30, 30, 30, num1);
-        myNumberBoxes[0].setPaint(Color.BLUE);
-        myNumberBoxes[0].setTextPaint(Color.RED);
-
-        int num2 = (int) (Math.random() * 40 + 1);
-        myNumberBoxes[1] = addIntBox(-50, -50, 30, 30, num2);
-        myNumberBoxes[1].setPaint(Color.BLUE);
-        myNumberBoxes[1].setTextPaint(Color.RED);
+        myNumberBoxes = new IntBoxNode[ARRAY_SIZE];
+        createRandomBoxes();
     }
 
     public void playAnimation() {
         // wait for initialization before animating
         waitForInitialization();
 
-        //TODO:Remove demo animation and replace with call to ShellSort.sort(myNumberBoxes, This);
-        
-        // Some example animation steps:
-
-        // Parameters are x, y, scale, rotation (in radians), and time (in ms)
-        waitForActivity(myNumberBoxes[0].animateToPositionScaleRotation(10, 30, 0.5, 0, 1000));
-
-        // The function waitForActivity makes sure the following animation doesn't start
-        // until after this animation step is done
-        waitForActivity(myNumberBoxes[0].animateToColor(Color.GREEN, 2000),
-                myNumberBoxes[0].animateToPositionScaleRotation(100, 30, 1.5, Math.toRadians(110), 2000));
-
-        // Multiple items can be animated at the same time. You just need to give them
-        // the same duration if you want them to move at the same speed. Lower duration
-        // steps would finish first, like the header move here.
-        waitForActivity(header.animateToPositionScaleRotation(0, 0, 2.0, 0, 500),
-                myNumberBoxes[0].animateToPositionScaleRotation(150, 110, 1, 0, 1000),
-                myNumberBoxes[1].animateToColor(Color.GREEN, 1000),
-                myNumberBoxes[1].animateToPositionScaleRotation(200, 110, 1, 0, 1000));
-
-        // You can show comparing with colour change
-        waitForActivity(myNumberBoxes[0].animateToColor(Color.PINK, 1000),
-                myNumberBoxes[1].animateToColor(Color.PINK, 1000));
-
-        // If you don't wait, then these will happen at the same time as the following
-        // steps
-        myNumberBoxes[0].animateToColor(Color.GREEN, 1000);
-        myNumberBoxes[1].animateToColor(Color.GREEN, 1000);
-
-        //TODO: remove 2 element demo
-        // You could use the number in boxes for comparisons
-        if (myNumberBoxes[0].getNumber() > myNumberBoxes[1].getNumber()) {
-            // You can even swap values in the array
-            IntBoxNode temp = myNumberBoxes[0];
-            myNumberBoxes[0] = myNumberBoxes[1];
-            myNumberBoxes[1] = temp;
-
-            // But make sure you animate it too, or it won't be visible.
-            // Hint: the positions should really be computed from the index.
-            waitForActivity(myNumberBoxes[0].animateToPositionScaleRotation(150, 110, 1, 0, 2000),
-                    myNumberBoxes[1].animateToPositionScaleRotation(200, 110, 1, 0, 2000));
-        }
-
-        // You can add items as you go...
-        // TODO: change the finish text to what we want it to be
+        ShellSort.sort(myNumberBoxes, this);
         PText allDone = addText(100, 200, "All Done!");
         allDone.setFont(new Font("Consolas", Font.PLAIN, 36));
         allDone.setTextPaint(Color.WHITE);
@@ -123,6 +73,8 @@ public class SortingAnimation extends AnimationScreen {
     /*
      * NEEDS TO BE IMPLEMENTED (REMOVE TODO comments after we do it)
      */
+    
+    // loop through array and fill indexes with random numbers.
     private void createRandomBoxes() {
         for (int i = 0; i < ARRAY_SIZE; i++) {
             int num = (int) (Math.random() * 40 + 1);
@@ -137,12 +89,11 @@ public class SortingAnimation extends AnimationScreen {
     }
 
     private double getBoxY() {
-        // TODO: return common y-position for boxes
-        return 0;
+        return totalHeight / 2;
     }
 
     public void highlightCompare(int i, int j) {
-        return ROW_Y;
+        // make sure his calls waitforactivity() return ROW_Y;
     }
 
     public void resetCompare(int i, int j) {
