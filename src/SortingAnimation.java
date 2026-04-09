@@ -93,25 +93,54 @@ public class SortingAnimation extends AnimationScreen {
     }
 
     public void highlightCompare(int i, int j) {
-        // make sure his calls waitforactivity() return ROW_Y;
+        waitForActivity(
+            myNumberBoxes[i].animateToColor(Color.PINK, 400),
+            myNumberBoxes[j].animateToColor(Color.PINK, 400)
+        );
     }
 
     public void resetCompare(int i, int j) {
-        // TODO: restore normal box colors
+        waitForActivity(
+            myNumberBoxes[i].animateToColor(Color.BLUE, 300),
+            myNumberBoxes[j].animateToColor(Color.BLUE, 300)
+        );
     }
 
+
     public void shiftBox(int from, int to) {
-        // TODO: animate a shifted box
+        // IMPORTANT: value is already copied into "to"
+        int value = myNumberBoxes[to].getNumber();
+
+        IntBoxNode temp = addIntBox(getBoxX(from), getBoxY(), BOX_SIZE, BOX_SIZE, value);
+        temp.setPaint(Color.GREEN);
+        temp.setTextPaint(Color.RED);
+
+        // lift up
+        waitForActivity(
+            temp.animateToPositionScaleRotation(getBoxX(from), ROW_Y - 40, 1, 0, 300)
+        );
+
+        // move sideways
+        waitForActivity(
+            temp.animateToPositionScaleRotation(getBoxX(to), ROW_Y - 40, 1, 0, 600)
+        );
+
+        // drop down
+        waitForActivity(
+            temp.animateToPositionScaleRotation(getBoxX(to), getBoxY(), 1, 0, 300)
+        );
+
+        temp.removeFromParent();
     }
 
     public void moveBoxToIndex(IntBoxNode box, int index) {
-        // TODO: animate a box to its index position
+        waitForActivity(
+            box.animateToPositionScaleRotation(getBoxX(index), getBoxY(), 1, 0, 600)
+        );
     }
 
     public void updateStatus(String text) {
-        // TODO: update header or status text
+        header.setText(text);
     }
 
-    
-    
 }
