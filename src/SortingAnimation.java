@@ -7,7 +7,7 @@ import org.piccolo2d.nodes.PText;
 public class SortingAnimation extends AnimationScreen {
     private static final long serialVersionUID = 1L;
 
-    private static final int totalWidth = 500;
+    private static final int totalWidth = 600;
     private static final int totalHeight = 300;
     private static final int BOX_SIZE = 30;
     private static final int SPACING = 10;
@@ -117,17 +117,17 @@ public class SortingAnimation extends AnimationScreen {
 
         // lift up
         waitForActivity(
-            temp.animateToPositionScaleRotation(getBoxX(from), ROW_Y - 40, 1, 0, 300)
+            temp.animateToPositionScaleRotation(getBoxX(from), ROW_Y - 40, 1, 0, totalHeight)
         );
 
         // move sideways
         waitForActivity(
-            temp.animateToPositionScaleRotation(getBoxX(to), ROW_Y - 40, 1, 0, 600)
+            temp.animateToPositionScaleRotation(getBoxX(to), ROW_Y - 40, 1, 0, totalWidth)
         );
 
         // drop down
         waitForActivity(
-            temp.animateToPositionScaleRotation(getBoxX(to), getBoxY(), 1, 0, 300)
+            temp.animateToPositionScaleRotation(getBoxX(to), getBoxY(), 1, 0, totalHeight)
         );
 
         temp.removeFromParent();
@@ -135,7 +135,7 @@ public class SortingAnimation extends AnimationScreen {
 
     public void moveBoxToIndex(IntBoxNode box, int index) {
         waitForActivity(
-            box.animateToPositionScaleRotation(getBoxX(index), getBoxY(), 1, 0, 600)
+            box.animateToPositionScaleRotation(getBoxX(index), getBoxY(), 1, 0, totalWidth)
         );
     }
 
