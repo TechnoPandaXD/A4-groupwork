@@ -24,7 +24,7 @@ public class ShellSort {
 					j -= gap;
 				}
 				// Drop the held value in place.
-				boxes[j].setText(temp);
+				screen.moveBoxToIndex(boxes[j],j);
 			}
 		}
 	}
