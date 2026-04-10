@@ -34,9 +34,9 @@ public class ShellSort {
 		return a.getNumber() > value;
 	}
 
-	// Copy the number from one index to another for the shift.
+	// Use shiftBox(from, to, value) so the slot at "to" is not updated until the ghost animation ends.
 	private static void shift(IntBoxNode[] boxes, int from, int to, SortingAnimation screen) {
-		boxes[to].setText(boxes[from].getNumber());
-		screen.shiftBox(from, to);
+		int value = boxes[from].getNumber();
+		screen.shiftBox(from, to, value);
 	}
 }
