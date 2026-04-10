@@ -23,11 +23,11 @@ public class SortingAnimation extends AnimationScreen {
         setBounds(0, 0, totalWidth, totalHeight);
 
         // add background as a coloured box
-        addColouredBox(0, 0, totalWidth, totalHeight, Color.LIGHT_GRAY);
+        addColouredBox(0, 0, totalWidth, totalHeight, Color.BLACK);
 
         // TODO: change header text to actual algorithm name
-        header = addText(0, 0, "Sorting is cool!");
-        header.setTextPaint(Color.DARK_GRAY);
+        header = addText(0, 0, "Shell Sort Animation");
+        header.setTextPaint(Color.WHITE);
 
         // You could use an array of int nodes to hold numbers
         // to visualize the array.
@@ -79,8 +79,8 @@ public class SortingAnimation extends AnimationScreen {
         for (int i = 0; i < ARRAY_SIZE; i++) {
             int num = (int) (Math.random() * 40 + 1);
             myNumberBoxes[i] = addIntBox(getBoxX(i), getBoxY(), BOX_SIZE, BOX_SIZE, num);
-            myNumberBoxes[i].setPaint(Color.BLUE);
-            myNumberBoxes[i].setTextPaint(Color.RED);
+            myNumberBoxes[i].setPaint(Color.DARK_GRAY);
+            myNumberBoxes[i].setTextPaint(Color.WHITE);
         }
     }
 
@@ -94,15 +94,15 @@ public class SortingAnimation extends AnimationScreen {
 
     public void highlightCompare(int i, int j) {
         waitForActivity(
-            myNumberBoxes[i].animateToColor(Color.PINK, 400),
-            myNumberBoxes[j].animateToColor(Color.PINK, 400)
+            myNumberBoxes[i].animateToColor(Color.RED, 400),
+            myNumberBoxes[j].animateToColor(Color.RED, 400)
         );
     }
 
     public void resetCompare(int i, int j) {
         waitForActivity(
-            myNumberBoxes[i].animateToColor(Color.BLUE, 300),
-            myNumberBoxes[j].animateToColor(Color.BLUE, 300)
+            myNumberBoxes[i].animateToColor(Color.DARK_GRAY, 300),
+            myNumberBoxes[j].animateToColor(Color.DARK_GRAY, 300)
         );
     }
 
@@ -112,8 +112,8 @@ public class SortingAnimation extends AnimationScreen {
         int value = myNumberBoxes[to].getNumber();
 
         IntBoxNode temp = addIntBox(getBoxX(from), getBoxY(), BOX_SIZE, BOX_SIZE, value);
-        temp.setPaint(Color.GREEN);
-        temp.setTextPaint(Color.RED);
+        temp.setPaint(Color.PINK);
+        temp.setTextPaint(Color.WHITE);
 
         // lift up
         waitForActivity(
