@@ -7,8 +7,8 @@ import org.piccolo2d.nodes.PText;
 public class SortingAnimation extends AnimationScreen {
     private static final long serialVersionUID = 1L;
 
-    private static final int totalWidth = 500;
-    private static final int totalHeight = 300;
+    private static final int totalWidth = 650;
+    private static final int totalHeight = 400;
     private static final int BOX_SIZE = 30;
     private static final int SPACING = 10;
     private static final int MARGIN = 50;
@@ -40,12 +40,12 @@ public class SortingAnimation extends AnimationScreen {
         waitForInitialization();
 
         ShellSort.sort(myNumberBoxes, this);
-        PText allDone = addText(100, 200, "All Done!");
+        PText allDone = addText(220, 300, "All Done!");
         allDone.setFont(new Font("Consolas", Font.PLAIN, 36));
         allDone.setTextPaint(Color.WHITE);
         // but sometimes they don't show up unless you animate them.
         // You can use a delay of zero, though.
-        allDone.animateToPositionScaleRotation(100, 200, 1, 0, 0);
+        allDone.animateToPositionScaleRotation(220, 300, 1, 0, 0);
     }
 
     public static void main(String[] args) {
