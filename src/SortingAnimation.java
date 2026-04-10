@@ -12,8 +12,6 @@ public class SortingAnimation extends AnimationScreen {
     private static final int totalHeight = 300;
     
     // Size of each box (the numbers)
-    private static final int totalWidth = 650;
-    private static final int totalHeight = 400;
     private static final int BOX_SIZE = 30;
     
     // Space between each box
@@ -68,8 +66,6 @@ public class SortingAnimation extends AnimationScreen {
         allDone.animateToPositionScaleRotation(220, 300, 1, 0, 0);
         
         
-        // You can use a delay of zero, though to make sure they actually show up
-        allDone.animateToPositionScaleRotation(100, 200, 1, 0, 0);
     }
 
 
@@ -152,18 +148,16 @@ public class SortingAnimation extends AnimationScreen {
 
         // lift up
         waitForActivity(
-            temp.animateToPositionScaleRotation(getBoxX(from), ROW_Y - 40, 1, 0, totalHeight)
+            temp.animateToPositionScaleRotation(getBoxX(from), ROW_Y - 40, 1, 0, 300)
         );
 
         // move sideways
         waitForActivity(
-            temp.animateToPositionScaleRotation(getBoxX(to), ROW_Y - 40, 1, 0, totalWidth)
-        );
+            temp.animateToPositionScaleRotation(getBoxX(to), ROW_Y - 40, 1, 0, 500));
 
         // drop down
         waitForActivity(
-            temp.animateToPositionScaleRotation(getBoxX(to), getBoxY(), 1, 0, totalHeight)
-        );
+            temp.animateToPositionScaleRotation(getBoxX(to), getBoxY(), 1, 0, 300));
 
         // remove temp box after move
         temp.removeFromParent();
@@ -180,5 +174,8 @@ public class SortingAnimation extends AnimationScreen {
     public void updateStatus(String text) {
         header.setText(text);
     }
+    
+    
 
 }
+
