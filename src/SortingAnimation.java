@@ -12,6 +12,8 @@ public class SortingAnimation extends AnimationScreen {
     private static final int totalHeight = 300;
     
     // Size of each box (the numbers)
+    private static final int totalWidth = 650;
+    private static final int totalHeight = 400;
     private static final int BOX_SIZE = 30;
     
     // Space between each box
@@ -37,11 +39,11 @@ public class SortingAnimation extends AnimationScreen {
         setBounds(0, 0, totalWidth, totalHeight);
 
         // add background as a coloured box
-        addColouredBox(0, 0, totalWidth, totalHeight, Color.LIGHT_GRAY);
+        addColouredBox(0, 0, totalWidth, totalHeight, Color.BLACK);
 
         // TODO: change header text to actual algorithm name (title text at the top)
-        header = addText(0, 0, "Sorting is cool!");
-        header.setTextPaint(Color.DARK_GRAY);
+        header = addText(0, 0, "Shell Sort Animation");
+        header.setTextPaint(Color.WHITE);
 
         // Create the array for the boxes
         myNumberBoxes = new IntBoxNode[ARRAY_SIZE];
@@ -55,16 +57,23 @@ public class SortingAnimation extends AnimationScreen {
         
         // Start the sorting algorithm
         ShellSort.sort(myNumberBoxes, this);
-        PText allDone = addText(100, 200, "All Done!");
+        PText allDone = addText(220, 300, "All Done!");
         allDone.setFont(new Font("Consolas", Font.PLAIN, 36));
         allDone.setTextPaint(Color.WHITE);
 
 
         // but sometimes they don't show up unless you animate them.
+        // You can use a delay of zero, though.
+
+        allDone.animateToPositionScaleRotation(220, 300, 1, 0, 0);
+        
+        
         // You can use a delay of zero, though to make sure they actually show up
         allDone.animateToPositionScaleRotation(100, 200, 1, 0, 0);
     }
 
+
+    
     public static void main(String[] args) {
         // start animation program
         SortingAnimation screen = new SortingAnimation();
@@ -104,8 +113,8 @@ public class SortingAnimation extends AnimationScreen {
             myNumberBoxes[i] = addIntBox(getBoxX(i), getBoxY(), BOX_SIZE, BOX_SIZE, num);
             
             // set colours
-            myNumberBoxes[i].setPaint(Color.BLUE);
-            myNumberBoxes[i].setTextPaint(Color.RED);
+            myNumberBoxes[i].setPaint(Color.DARK_GRAY);
+            myNumberBoxes[i].setTextPaint(Color.WHITE);
         }
     }
 
@@ -122,29 +131,24 @@ public class SortingAnimation extends AnimationScreen {
     // Highlights two boxes when comparing
     public void highlightCompare(int i, int j) {
         waitForActivity(
-            myNumberBoxes[i].animateToColor(Color.PINK, 400),
-            myNumberBoxes[j].animateToColor(Color.PINK, 400)
+            myNumberBoxes[i].animateToColor(Color.RED, 400),
+            myNumberBoxes[j].animateToColor(Color.RED, 400)
         );
     }
 
     // Resets color after comparing
     public void resetCompare(int i, int j) {
         waitForActivity(
-            myNumberBoxes[i].animateToColor(Color.BLUE, 300),
-            myNumberBoxes[j].animateToColor(Color.BLUE, 300)
+            myNumberBoxes[i].animateToColor(Color.DARK_GRAY, 300),
+            myNumberBoxes[j].animateToColor(Color.DARK_GRAY, 300)
         );
     }
 
 
-    // Moves a value from one index to another (shift)
-    public void shiftBox(int from, int to) {
-        // get the value being moved
-        int value = myNumberBoxes[to].getNumber();
-
-        // Create a temporary moving box
+    public void shiftBox(int from, int to, int value) {
         IntBoxNode temp = addIntBox(getBoxX(from), getBoxY(), BOX_SIZE, BOX_SIZE, value);
-        temp.setPaint(Color.GREEN);
-        temp.setTextPaint(Color.RED);
+        temp.setPaint(Color.PINK);
+        temp.setTextPaint(Color.WHITE);
 
         // lift up
         waitForActivity(
@@ -163,6 +167,7 @@ public class SortingAnimation extends AnimationScreen {
 
         // remove temp box after move
         temp.removeFromParent();
+        myNumberBoxes[to].setText(value);
     }
     // Moves a box directly to a new index
     public void moveBoxToIndex(IntBoxNode box, int index) {
