@@ -107,10 +107,7 @@ public class SortingAnimation extends AnimationScreen {
     }
 
 
-    public void shiftBox(int from, int to) {
-        // IMPORTANT: value is already copied into "to"
-        int value = myNumberBoxes[to].getNumber();
-
+    public void shiftBox(int from, int to, int value) {
         IntBoxNode temp = addIntBox(getBoxX(from), getBoxY(), BOX_SIZE, BOX_SIZE, value);
         temp.setPaint(Color.PINK);
         temp.setTextPaint(Color.WHITE);
@@ -131,6 +128,7 @@ public class SortingAnimation extends AnimationScreen {
         );
 
         temp.removeFromParent();
+        myNumberBoxes[to].setText(value);
     }
 
     public void moveBoxToIndex(IntBoxNode box, int index) {
